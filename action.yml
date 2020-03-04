@@ -10,7 +10,7 @@ inputs:
     default: 'fasterer'
   level:
     description: 'Report level for reviewdog [info,warning,error]'
-    default: 'warning'
+    default: 'error'
   reporter:
     description: |
       Reporter of reviewdog command [github-pr-check,github-pr-review].
