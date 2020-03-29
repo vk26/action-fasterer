@@ -6,4 +6,4 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag reviewdog-rubocop:$(date +%s)
+      run: docker build . --file Dockerfile --tag reviewdog-fasterer:$(date +%s)
