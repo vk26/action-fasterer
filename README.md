@@ -44,11 +44,6 @@ Optional. Reporter of reviewdog command [`github-pr-check`, `github-pr-review`].
 The default is `github-pr-check`.
 
 ## Usage
-```bash
-mkdir -p .github/workflows
-touch .github/workflows/main.yml
-```
-
 .github/workflows/main.yml:
 ```yml
 name: reviewdog
@@ -64,7 +59,7 @@ jobs:
         uses: vk26/action-fasterer@v1
         with:
           github_token: ${{ secrets.github_token }}
-          reporter: github-pr-review
+          reporter: github-pr-review # Default is github-pr-check
 ```
 
 ## Sponsor
