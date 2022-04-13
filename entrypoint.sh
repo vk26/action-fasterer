@@ -2,6 +2,8 @@
 
 cd "$GITHUB_WORKSPACE"
 
+git config --global --add safe.directory $GITHUB_WORKSPACE
+
 export REVIEWDOG_GITHUB_API_TOKEN="${INPUT_GITHUB_TOKEN}"
 
 fasterer | sed "s/\x1b\[[0-9;]*m//g" \
