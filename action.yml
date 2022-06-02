@@ -5,6 +5,8 @@ inputs:
   github_token:
     description: 'GITHUB_TOKEN.'
     required: true
+  fasterer_version:
+    description: 'Fasterer version'
   tool_name:
     description: 'Tool name to use for reviewdog reporter'
     default: 'fasterer'
@@ -21,6 +23,7 @@ runs:
   image: 'Dockerfile'
   args:
     - ${{ inputs.github_token }}
+    - ${{ inputs.fasterer_version }}
     - ${{ inputs.tool_name }}
     - ${{ inputs.level }}
     - ${{ inputs.reporter }}
