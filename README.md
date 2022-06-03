@@ -28,6 +28,13 @@ With `reporter: github-pr-review` a comment is added to the Pull Request Convers
 
 **Required**. Must be in form of `github_token: ${{ secrets.github_token }}`'.
 
+### `fasterer_version`
+
+Optional. Set fasterer version. Possible values:
+* empty or omit: install latest version
+* `gemfile`: install version from Gemfile (`Gemfile.lock` should be presented, otherwise it will fallback to latest bundler version)
+* version (e.g. `0.10.0`): install said version
+
 ### `tool_name`
 
 Optional. Tool name to use for reviewdog reporter. Useful when running multiple
