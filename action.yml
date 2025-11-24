@@ -18,15 +18,31 @@ inputs:
       Reporter of reviewdog command [github-pr-check,github-pr-review].
       Default is github-pr-check.
     default: 'github-pr-check'
+  filter_mode:
+    description: 'Filtering mode for the reviewdog command [added,diff_context,file,nofilter]'
+    default: 'nofilter'
+  fail_on_error:
+    description: 'Exit code for reviewdog when errors are found [true,false]'
+    default: 'false'
+  reviewdog_flags:
+    description: 'Additional reviewdog flags'
+    default: ''
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
-  args:
-    - ${{ inputs.github_token }}
-    - ${{ inputs.fasterer_version }}
-    - ${{ inputs.tool_name }}
-    - ${{ inputs.level }}
-    - ${{ inputs.reporter }}
+  using: 'composite'
+  steps:
+    - name: Run fasterer with reviewdog
+      shell: sh
+      env:
+        INPUT_GITHUB_TOKEN: ${{ inputs.github_token }}
+        INPUT_FASTERER_VERSION: ${{ inputs.fasterer_version }}
+        INPUT_TOOL_NAME: ${{ inputs.tool_name }}
+        INPUT_LEVEL: ${{ inputs.level }}
+        INPUT_REPORTER: ${{ inputs.reporter }}
+        INPUT_FILTER_MODE: ${{ inputs.filter_mode }}
+        INPUT_FAIL_ON_ERROR: ${{ inputs.fail_on_error }}
+        INPUT_REVIEWDOG_FLAGS: ${{ inputs.reviewdog_flags }}
+      run: |
+        ${{ github.action_path }}/entrypoint.sh
 branding:
   icon: 'check-circle'
   color: 'red'

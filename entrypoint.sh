@@ -1,25 +1,23 @@
 #!/bin/sh
 
-version() {
-  if [ -n "$1" ]; then
-    echo "-v $1"
-  fi
-}
+set -e
 
 cd "$GITHUB_WORKSPACE"
 
 git config --global --add safe.directory $GITHUB_WORKSPACE || exit 1
 
-echo '::group:: Installing fasterer ... https://github.com/DamirSvrtan/fasterer'
-# if 'gemfile' fasterer version selected
-if [ "$INPUT_FASTERER_VERSION" = "gemfile" ]; then
-  # if Gemfile.lock is here
-  if [ -f 'Gemfile.lock' ]; then
-    # grep for fasterer version
-    FASTERER_GEMFILE_VERSION=$(grep -oP '^\s{4}fasterer\s\(\K.*(?=\))' Gemfile.lock)
+TEMP_PATH="$(mktemp -d)"
+PATH="${TEMP_PATH}:$PATH"
 
-    # if fasterer version found, then pass it to the gem install
-    # left it empty otherwise, so no version will be passed
+echo '::group::🐶 Installing reviewdog ... https://github.com/reviewdog/reviewdog'
+REVIEWDOG_VERSION=${REVIEWDOG_VERSION:-latest}
+curl -sfL https://raw.githubusercontent.com/reviewdog/reviewdog/master/install.sh | sh -s -- -b "${TEMP_PATH}" "${REVIEWDOG_VERSION}" 2>&1
+echo '::endgroup::'
+
+echo '::group:: Installing fasterer with extensions ... https://github.com/presidentbeef/fasterer'
+if [ "$INPUT_FASTERER_VERSION" = "gemfile" ]; then
+  if [ -f 'Gemfile.lock' ]; then
+    FASTERER_GEMFILE_VERSION=$(ruby -ne 'print $& if /^\s{4}fasterer\s\(\K.*(?=\))/' Gemfile.lock)
     if [ -n "$FASTERER_GEMFILE_VERSION" ]; then
       FASTERER_VERSION=$FASTERER_GEMFILE_VERSION
     else
@@ -33,8 +31,11 @@ else
   FASTERER_VERSION=$INPUT_FASTERER_VERSION
 fi
 
-# shellcheck disable=SC2046,SC2086
-gem install -N fasterer $(version $FASTERER_VERSION)
+if [ -n "$FASTERER_VERSION" ]; then
+  gem install -N fasterer --version "${FASTERER_VERSION}"
+else
+  gem install -N fasterer
+fi
 echo '::endgroup::'
 
 export REVIEWDOG_GITHUB_API_TOKEN="${INPUT_GITHUB_TOKEN}"
@@ -42,8 +43,16 @@ export REVIEWDOG_GITHUB_API_TOKEN="${INPUT_GITHUB_TOKEN}"
 echo '::group:: Running fasterer with reviewdog 🐶 ...'
 
 fasterer | sed "s/\x1b\[[0-9;]*m//g" \
-  | reviewdog -efm="%f:%l %m" -efm="%-G%.%#" -name="${INPUT_TOOL_NAME}" -reporter="${INPUT_REPORTER}" -level="${INPUT_LEVEL}"
-  
+  | reviewdog \
+  -efm="%f:%l %m" \
+  -efm="%-G%.%#" \
+  -name="${INPUT_TOOL_NAME}" \
+  -reporter="${INPUT_REPORTER}" \
+  -level="${INPUT_LEVEL}" \
+  -filter-mode="${INPUT_FILTER_MODE}" \
+  -fail-on-error="${INPUT_FAIL_ON_ERROR}" \
+  ${INPUT_REVIEWDOG_FLAGS}
+
 exit_code=$?
 echo '::endgroup::'
 

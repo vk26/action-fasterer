@@ -1,9 +1,24 @@
 name: CI
 on: [push]
 jobs:
-  build:
+  test-skip-install-and-use-bundler:
+    name: runner / fasterer
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: test/using_gemfile
+        env:
+          BUNDLE_GEMFILE: ${{ github.workspace }}/test/using_gemfile/Gemfile
     steps:
-    - uses: actions/checkout@50fbc622fc4ef5163becd7fab6573eac35f8462e # v1.2.0
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag reviewdog-fasterer:$(date +%s)
+      - uses: actions/checkout@v2
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.0
+          bundler-cache: true
+      - name: install fasterer with version written in Gemfile.lock
+        uses: ./
+        with:
+          github_token: ${{ secrets.github_token }}
+          fasterer_version: 'gemfile'
+      - run: |
+          bundle exec fasterer

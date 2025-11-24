@@ -12,7 +12,7 @@ jobs:
       - uses: reviewdog/action-depup@d6b40096afad49ca676145faaba7190df29a9807 # v1.6.3
         id: depup
         with:
-          file: Dockerfile
+          file: entrypoint.sh
           version_name: REVIEWDOG_VERSION
           repo: reviewdog/reviewdog
 

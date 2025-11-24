@@ -50,6 +50,20 @@ It's same as `-level` flag of reviewdog. By default - `error`.
 Optional. Reporter of reviewdog command [`github-pr-check`, `github-pr-review`].
 The default is `github-pr-check`.
 
+### `filter_mode`
+
+Optional. Filtering mode for the reviewdog command [`added`, `diff_context`, `file`, `nofilter`].
+The default is `nofilter`.
+
+### `fail_on_error`
+
+Optional. Exit code for reviewdog when errors are found [`true`, `false`].
+The default is `false`.
+
+### `reviewdog_flags`
+
+Optional. Additional reviewdog flags.
+
 ## Usage
 .github/workflows/main.yml:
 ```yml
@@ -63,7 +77,7 @@ jobs:
       - name: Check out code
         uses: actions/checkout@50fbc622fc4ef5163becd7fab6573eac35f8462e # v1.2.0
       - name: fasterer
-        uses: vk26/action-fasterer@14efb2322db70c51b0211343d444adf457ff4666 # v1
+        uses: reviewdog/action-fasterer@v1
         with:
           github_token: ${{ secrets.github_token }}
           reporter: github-pr-review # Default is github-pr-check
@@ -73,7 +87,7 @@ jobs:
 
 <p>
   <a href="https://evrone.com/?utm_source=action-fasterer">
-    <img src="https://www.mgrachev.com/assets/static/evrone-sponsored-300.png" 
+    <img src="https://www.mgrachev.com/assets/static/evrone-sponsored-300.png"
       alt="Sponsored by Evrone" width="210">
   </a>
 </p>
