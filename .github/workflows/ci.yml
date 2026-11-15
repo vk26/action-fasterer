@@ -7,8 +7,8 @@ jobs:
     defaults:
       run:
         working-directory: test/using_gemfile
-        env:
-          BUNDLE_GEMFILE: ${{ github.workspace }}/test/using_gemfile/Gemfile
+    env:
+      BUNDLE_GEMFILE: ${{ github.workspace }}/test/using_gemfile/Gemfile
     steps:
       - uses: actions/checkout@v7.0.1
       - uses: ruby/setup-ruby@v1.338.0
@@ -19,6 +19,6 @@ jobs:
         uses: ./
         with:
           github_token: ${{ secrets.github_token }}
-          fasterer_version: 'gemfile'
+          fasterer_version: "gemfile"
       - run: |
           bundle exec fasterer
