@@ -1,0 +1,16 @@
+{
+  "extends": [
+    "config:recommended"
+  ],
+  "labels": [
+    "bump:patch"
+  ],
+  "packageRules": [
+    {
+      "matchFileNames": [
+        ".github/workflows/**"
+      ],
+      "labels": []
+    }
+  ]
+}
