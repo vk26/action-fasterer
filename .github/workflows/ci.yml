@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@v7.0.1
       - uses: ruby/setup-ruby@v1.338.0
         with:
-          ruby-version: 3.0
+          ruby-version: "4.0"
           bundler-cache: true
       - name: install fasterer with version written in Gemfile.lock
         uses: ./
