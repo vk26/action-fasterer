@@ -7,7 +7,7 @@ GEM
     ruby_parser (3.21.1)
       racc (~> 1.5)
       sexp_processor (~> 4.16)
-    sexp_processor (4.17.4)
+    sexp_processor (4.17.6)
 
 PLATFORMS
   arm64-darwin-24
