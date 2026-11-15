@@ -4,27 +4,22 @@
 version: 'v0.0.3'
 workflows:
     '.github/workflows/ci.yml':
-        - 'actions/checkout@v2.8.0'
-        - 'ruby/setup-ruby@v1.335.0'
+        - 'actions/checkout@v7.0.1'
+        - 'ruby/setup-ruby@v1.338.0'
     '.github/workflows/depup.yml':
-        - 'actions/checkout@v3.6.0'
-        - 'peter-evans/create-pull-request@v4.2.4'
-        - 'reviewdog/action-depup@v1.6.3'
+        - 'actions/checkout@v7.0.1'
+        - 'peter-evans/create-pull-request@v8.1.3'
+        - 'reviewdog/action-depup@v1.6.7'
     '.github/workflows/release.yml':
-        - 'actions/checkout@v2.8.0'
+        - 'actions/checkout@v7.0.1'
         - 'haya14busa/action-update-semver@v1.5.1'
     '.github/workflows/yamllint.yml':
-        - 'actions/checkout@v2.8.0'
-        - 'reviewdog/action-yamllint@v1.25.4'
+        - 'actions/checkout@v7.0.1'
+        - 'reviewdog/action-yamllint@v1.26.0'
 dependencies:
-    'actions/checkout@v2.8.0':
-        ref: 'v2.8.0'
-        commit: 'sha1-0717577d45739eb3c851188b29f50ed6c0b2194e'
-        owner_id: 44036562
-        repo_id: 197814629
-    'actions/checkout@v3.6.0':
-        ref: 'v3.6.0'
-        commit: 'sha1-f43a0e5ff2bd294095638e18286ca9a3d1956744'
+    'actions/checkout@v7.0.1':
+        ref: 'v7.0.1'
+        commit: 'sha1-3d3c42e5aac5ba805825da76410c181273ba90b1'
         owner_id: 44036562
         repo_id: 197814629
     'haya14busa/action-update-semver@v1.5.1':
@@ -32,23 +27,23 @@ dependencies:
         commit: 'sha1-7d2c558640ea49e798d46539536190aff8c18715'
         owner_id: 3797062
         repo_id: 225328382
-    'peter-evans/create-pull-request@v4.2.4':
-        ref: 'v4.2.4'
-        commit: 'sha1-38e0b6e68b4c852a5500a94740f0e535e0d7ba54'
+    'peter-evans/create-pull-request@v8.1.3':
+        ref: 'v8.1.3'
+        commit: 'sha1-3ffccacd46053766916f087ce41d627c0b8cf2d1'
         owner_id: 18365890
         repo_id: 197176365
-    'reviewdog/action-depup@v1.6.3':
-        ref: 'v1.6.3'
-        commit: 'sha1-d6b40096afad49ca676145faaba7190df29a9807'
+    'reviewdog/action-depup@v1.6.7':
+        ref: 'v1.6.7'
+        commit: 'sha1-a03fa2103b273193becba8cca43a992b9173f5dc'
         owner_id: 48765237
         repo_id: 234837904
-    'reviewdog/action-yamllint@v1.25.4':
-        ref: 'v1.25.4'
-        commit: 'sha1-072d1a6ca6f5a03de10f492f6119fcbc8d47302b'
+    'reviewdog/action-yamllint@v1.26.0':
+        ref: 'v1.26.0'
+        commit: 'sha1-020fba38ce9fed550c704d933aeeb7d6360f7d47'
         owner_id: 48765237
         repo_id: 233270440
-    'ruby/setup-ruby@v1.335.0':
-        ref: 'v1.335.0'
-        commit: 'sha1-7f797815d8adceb1c412e7abefdd1ab4abc47a5f'
+    'ruby/setup-ruby@v1.338.0':
+        ref: 'v1.338.0'
+        commit: 'sha1-b3aaceaef7e0ee231b499e7b5f49c03fc1d32199'
         owner_id: 210414
         repo_id: 231208785
