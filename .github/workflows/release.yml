@@ -11,4 +11,3 @@ jobs:
       - uses: haya14busa/action-update-semver@v1.5.1
         with:
           github_token: ${{ secrets.github_token }}
-

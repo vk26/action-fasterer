@@ -1,0 +1,10 @@
+---
+extends: default
+
+rules:
+  # GitHub Actions workflows use `on:` and omit the document start marker.
+  document-start: disable
+  truthy:
+    check-keys: false
+  # Workflow/PR body text and descriptions contain long lines.
+  line-length: disable
